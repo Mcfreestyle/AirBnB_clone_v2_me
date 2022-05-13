@@ -21,7 +21,7 @@ class State(BaseModel, Base):
     if storage != 'db':
         @property
         def cities(self):
-            cities = models.storage.all('City')
+            cities = models.storage.all(State)
             list_city = []
             for city in cities.values():
                 if city.state_id == self.id:
