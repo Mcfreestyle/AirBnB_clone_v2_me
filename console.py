@@ -2,9 +2,26 @@
 
 """ This module supplies the HBNBCommand class"""
 
+from models.base_model import BaseModel
+from models.state import State
+from models.city import City
+from models.user import User
+from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
+
 import cmd
-from models.engine.file_storage import models
 from models import storage
+
+models = {
+          "BaseModel": BaseModel,
+          "User": User,
+          "State": State,
+          "City": City,
+          "Amenity": Amenity,
+          "Place": Place,
+          "Review": Review
+         }
 
 
 class HBNBCommand(cmd.Cmd):
@@ -94,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        dict_obj = storage.all(args[0])
+        dict_obj = storage.all(eval(args[0]))
         for v in dict_obj.values():
             list_str.append(str(v))
         print(list_str)
