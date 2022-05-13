@@ -2,6 +2,9 @@
 
 '''File with the class Place'''
 import models
+from models.review import Review
+from models.amenity import Amenity
+
 from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy import Table, Column, String, Integer, Float, ForeignKey
@@ -26,7 +29,7 @@ class Place(BaseModel, Base):
 
         @property
         def reviews(self):
-            reviews = models.storage.all('Review')
+            reviews = models.storage.all(Review)
             list_review = []
             for review in reviews.values():
                 if review.place_id == self.id:
@@ -38,7 +41,7 @@ class Place(BaseModel, Base):
             if obj.__class__.__name__ == 'Amenity':
                 self.amenity_ids.append(ameni.id)
             if self.amenity_ids.count(ameni.id) == 1:
-                dict_obj = models.storage.all("Amenity")
+                dict_obj = models.storage.all(Amenity)
                 for obj in dict_obj.values():
                     if ameni.id == obj.id:
                         self.amenity_ids.pop()
