@@ -4,12 +4,12 @@
 
 import uuid
 from datetime import datetime
+from os import getenv
 import models
+
 
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-
-from datetime import datetime
 
 Base = declarative_base()
 
